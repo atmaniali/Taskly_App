@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from django.contrib.auth.models import User
 
 from .serializer import UserSerializer, ProfileSerializer
@@ -14,7 +14,14 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsUserOwnerOrGetOrPostOnly]
 
 
-class ProfileViewSet(viewsets.ModelViewSet):
+class ProfileViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    """_summary_
+    custom viewset to just retreive and update Profile model
+    Args:
+        viewsets (_type_): _description_
+        mixins (_type_): _description_
+        mixins (_type_): _description_
+    """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [IsProfileOwnerOrGetOrPostOnly]
