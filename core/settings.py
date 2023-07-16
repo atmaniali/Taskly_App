@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # local
     'users',
+    'house',
     # 3rd
     'rest_framework',
     # social oauth
