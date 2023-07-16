@@ -25,7 +25,8 @@ user_profile_image = GenerateImageProfilePath()
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='profile')
     image = models.FileField(
         upload_to=user_profile_image, null=True, blank=True)
 

@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from .models import Profile
 
 
 class IsUserOwnerOrGetOrPostOnly(permissions.BasePermission):
@@ -32,6 +33,11 @@ class IsProfileOwnerOrGetOrPostOnly(permissions.BasePermission):
             return True
 
         if not request.user.is_anonymous:
-            return request.user.profile == obj
+            # print(f"_____ {obj}")
+            # print(f"_____ REQUEST USER {request.user}")
+            try:
+                return request.user.profile == obj
+            except Profile.DoesNotExist:
+                return False
 
         return False
