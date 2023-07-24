@@ -76,3 +76,4 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['url', 'id', 'username', 'email',
                   'first_name', 'last_name', 'password', 'old_password', 'profile']
+        # t
