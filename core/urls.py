@@ -20,6 +20,7 @@ from django.conf import settings
 from django.urls import re_path
 
 from users import router as users_api_router
+from house import router as house_api_router
 
 api_auth_urlpatterns = [
     re_path(r'', include('rest_framework_social_oauth2.urls')),
@@ -31,8 +32,9 @@ if settings.DEBUG:
         path(r'verify/', include('rest_framework.urls'))),
 
 api_urlpatterns = [
+    path(r'auth/', include(api_auth_urlpatterns)),
     path(r'accounts/', include(users_api_router.router.urls)),
-    path(r'auth/', include(api_auth_urlpatterns))
+    path(r'house/', include(house_api_router.router.urls)),
 ]
 
 urlpatterns = [
