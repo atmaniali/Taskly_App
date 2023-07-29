@@ -22,7 +22,7 @@ class GenerateHousePath(object):
 
     def __call__(self, instance, filename):
         ext = filename.split('.')[-1]
-        path = f"media/house/{instance.id}/images"
+        path = f"house/{instance.id}/images"
         name = f"house_image.{ext}"
         return os.path.join(path, name)
 

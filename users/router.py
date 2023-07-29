@@ -5,5 +5,5 @@ app_name = 'users'
 
 router = routers.DefaultRouter()
 
-router.register('users', UserViewSet)
-router.register('profile', ProfileViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'profile', ProfileViewSet)

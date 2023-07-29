@@ -40,12 +40,13 @@ INSTALLED_APPS = [
     # local
     'users',
     'house',
+    'task',
     # 3rd
     'rest_framework',
     # social oauth
-    'oauth2_provider',
-    'social_django',
-    'rest_framework_social_oauth2',
+    # 'oauth2_provider',
+    # 'social_django',
+    # 'rest_framework_social_oauth2',
 
 
 ]
@@ -71,11 +72,12 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',  # new
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # context oauth
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -126,8 +128,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
 
         # social oauth
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
+        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        # 'rest_framework_social_oauth2.authentication.SocialAuthentication',
 
 
     ]
@@ -159,6 +161,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

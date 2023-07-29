@@ -5,4 +5,4 @@ app_name = 'house'
 
 router = routers.DefaultRouter()
 
-router.register('houses', HouseViewSets)
+router.register(r'houses', HouseViewSets)

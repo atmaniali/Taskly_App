@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.urls import re_path
+from django.conf.urls.static import static
 
 from users import router as users_api_router
 from house import router as house_api_router
 
 api_auth_urlpatterns = [
-    re_path(r'', include('rest_framework_social_oauth2.urls')),
+    # re_psath(r'', include('rest_framework_social_oauth2.urls')),
 ]
 
 
@@ -41,3 +42,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_urlpatterns)),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
