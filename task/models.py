@@ -47,7 +47,7 @@ class TaskList(models.Model):
 class Task(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     completed_on = models.DateTimeField(blank=True, null=True)
-    completed_on = models.DateTimeField(blank=True, null=True)
+    # completed_on = models.DateTimeField(blank=True, null=True)
     completed_by = models.ForeignKey(
         'users.Profile', on_delete=models.SET_NULL, related_name='completed_tasks', null=True, blank=True)
     created_by = models.ForeignKey(
