@@ -13,8 +13,7 @@ TASK_STATUS_CHOICES = (
 
 
 class TaskListSerializer(serializers.ModelSerializer):
-    house = serializers.HyperlinkedRelatedField(
-        many=True, queryset=House.objects.all(), name='house-detail')
+    house = serializers.HyperlinkedRelatedField(queryset=House.objects.all(), many=False, view_name='house-detail')
     created_by = serializers.HyperlinkedRelatedField(
         read_only=True, many=False, view_name='profile-detail')
 
