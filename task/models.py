@@ -9,7 +9,7 @@ NOT_COMPLET = 'NC'
 COMPLET = 'C'
 TASK_STATUS_CHOICES = (
     (NOT_COMPLET, 'Not Complet'),
-    (COMPLET, 'complet')
+    (COMPLET, 'Complet')
 )
 
 

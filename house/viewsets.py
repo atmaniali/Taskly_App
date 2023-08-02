@@ -2,6 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth.models import User
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from .models import House
 from .serializer import HouseSerializer
@@ -12,6 +14,11 @@ class HouseViewSets(viewsets.ModelViewSet):
     queryset = House.objects.all()
     serializer_class = HouseSerializer
     permission_classes = [IsManagerOrNull]
+    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
+    search_fields = ['name', 'description']
+    ordering_fileds = ['point', 'compelted_task_count', 'not_compelted_task_count']
+    ordering = ['point']
+    filterset_fields = ['members']
 
     @action(detail=True, methods=['post'], name='Join', permission_classes=[])
     def join(self, request, pk=None):

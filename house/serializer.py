@@ -9,10 +9,11 @@ class HouseSerializer(serializers.ModelSerializer):
         read_only=True, many=True, view_name='profile-detail')
     manager = serializers.HyperlinkedRelatedField(read_only=True,
                                                   many=False, view_name='profile-detail')
+    taskLists = serializers.HyperlinkedRelatedField(read_only=True, many=True, view_name='tasklist-detail', source='lists')
 
     class Meta:
         model = House
         fields = ['url', 'id', 'name', 'image', 'created_at', 'manager', 'description', 'point',
-                  'compelted_task_count', 'not_compelted_task_count', 'members', 'members_count']
+                  'compelted_task_count', 'not_compelted_task_count', 'members', 'members_count', 'taskLists']
         read_only_fields = ['compelted_task_count',
                             'not_compelted_task_count', 'point']

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import colorlog
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!69srf53o!+r_554vsr(6x-our+4l)h(qhy37+wk=01-!wp5q+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -43,12 +43,9 @@ INSTALLED_APPS = [
     'task',
     # 3rd
     'rest_framework',
+    'django_filters',
     # social oauth
-    # 'oauth2_provider',
-    # 'social_django',
-    # 'rest_framework_social_oauth2',
-
-
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -128,11 +125,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
 
         # social oauth
-        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        # 'rest_framework_social_oauth2.authentication.SocialAuthentication',
-
-
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ]
+}
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
 }
 
 AUTHENTICATION_BACKENDS = (
@@ -172,6 +171,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {},
+    'formatters': {
+        'color': {
+            '()': 'colorlog.ColoredFormatter',
+            'format': '%(log_color)s%(levelname)-8s %(message)s',
+            'log_colors': {
+                'DEBUG':    'cyan',
+                'INFO':     'white',
+                'WARNING':  'yellow',
+                'ERROR':    'red',
+                'CRITICAL': 'bold_red',
+            },
+        }
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
@@ -179,10 +192,17 @@ LOGGING = {
         'file': {
             'class': 'logging.FileHandler',
             'filename': 'django.log',
+            # 'formatter': 'color',
         },
+        'debug': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'debug.log',
+            'formatter': 'color'
+        }
     },
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': ['console', 'file', 'debug'],
         'level': 'DEBUG',
     },
 }

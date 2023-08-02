@@ -9,7 +9,7 @@ from house import router as house_api_router
 from task import router as task_api_router
 
 api_auth_urlpatterns = [
-    # re_psath(r'', include('rest_framework_social_oauth2.urls')),
+    re_path(r'', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 
